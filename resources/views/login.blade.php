@@ -15,10 +15,10 @@
             border-radius: 15px;
         }
         .btn-primary{
-            background-color:#E74646;
+            background-color:#142474;
         }
         .btn-primary:hover{
-            background-color:#FA9884;
+            background-color:#1e38bb;
         }
     </style>
 </head>
@@ -26,7 +26,7 @@
     <form action="/user/login" method="POST" enctype="multipart/form-data" class="shadowBox" style="background-color:#ffffff; width: 500px; padding:50px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
         {{ csrf_field() }}
 
-        <div style="font-family: sans-serif; font-weight:bold; color:#E74646; font-size:25px">HEALTHcare</div>
+        <div style="font-family: sans-serif; font-weight:bold; color:#142474; font-size:25px">HEALTHcare</div>
 
         <div style="margin-bottom:20px">Hi, Welcome Back!</div>
         <div class="form-group">
@@ -38,7 +38,7 @@
             <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
         </div>
         <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" name="remember" id="exampleCheck1" style="background-color:#FA9884; border:none; ">
+            <input type="checkbox" class="form-check-input" name="remember" id="exampleCheck1" style="background-color:#142474; border:none; ">
             <label class="form-check-label" for="exampleCheck1">Remember me</label>
         </div>
 
@@ -50,7 +50,7 @@
         <button type="submit" class="btn btn-primary" style="display:block; margin:20px auto 0px auto; border:none">Login</button>
 
         <div style="display: flex; margin-top:10px">
-            <a href="/user/register" style="text-decoration: none; display:block; margin:0 auto; color:#FA9884">Do not have an account? Register now!</a>
+            <a href="/user/register" style="text-decoration: none; display:block; margin:0 auto; color:#1e38bb">Do not have an account? Register now!</a>
         </div>
 
     </form>
