@@ -22,7 +22,8 @@ return new class extends Migration
             $table->integer('weight');
             $table->string('phone');
             $table->string('role')->default('patient');
-            $table->string('image_url')->default('http://drive.google.com/uc?export=view&id=1CECitmKKwZG_mULsFAmzBG35pRT_sbcg');
+            $table->string('specialist')->nullabe()->change();
+            $table->string('image_url')->default('default.png');
             $table->rememberToken();
             $table->timestamps();
         });
