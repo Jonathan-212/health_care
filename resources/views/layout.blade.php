@@ -37,7 +37,7 @@
             text-decoration: none; color:white; margin-bottom:15px
         }
         .menu:hover{
-            color:#FFF3E2;
+            color:#e7d8c4;
         }
     </style>
 </head>
@@ -46,7 +46,7 @@
         <a href="/" class="menu" style="margin-bottom:50px;"><div style="font-family: sans-serif; font-size:25px; font-weight:bold; ">HEALTHcare</div></a>
 
         <a href="/" class="menu">Dashboard</a>
-        <a href="/consultation" class="menu">Doctor Consultation</a>
+        <a href="/consultation" class="menu">Consultation</a>
         <a href="/medicine" class="menu">My Medicine</a>
         <a href="/setting" class="menu">Setting</a>
 
