@@ -13,6 +13,7 @@
             box-shadow: 5px 10px 18px #b6b6b6;
             border:none;
             border-radius: 15px;
+            background-color:white;
         }
         .btn-primary{
             background-color:#142474;
