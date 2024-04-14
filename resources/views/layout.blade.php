@@ -42,6 +42,7 @@
         }
         .hoverList{
             background-color: white;
+            cursor: pointer;
         }
         .hoverList:hover td, .hoverList:hover th{
             background-color: rgb(240, 240, 240);
