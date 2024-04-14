@@ -46,7 +46,7 @@
         <a href="/" class="menu" style="margin-bottom:50px;"><div style="font-family: sans-serif; font-size:25px; font-weight:bold; ">HEALTHcare</div></a>
 
         <a href="/" class="menu">Dashboard</a>
-        <a href="/consultation" class="menu">Consultation</a>
+        <a href="/consultation/doctor-list" class="menu">Consultation</a>
         <a href="/medicine" class="menu">My Medicine</a>
         <a href="/setting" class="menu">Setting</a>
 
