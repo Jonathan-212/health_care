@@ -40,6 +40,12 @@
         .menu:hover{
             color:#e7d8c4;
         }
+        .hoverList{
+            background-color: white;
+        }
+        .hoverList:hover td, .hoverList:hover th{
+            background-color: rgb(240, 240, 240);
+        }
     </style>
 </head>
 <body style="background-color:#f0f0f0; display:flex;">
