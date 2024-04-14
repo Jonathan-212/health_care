@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('weight');
             $table->string('phone');
             $table->string('role')->default('patient');
-            $table->string('specialist')->nullabe()->change();
+            $table->string('specialist')->nullable($value = true);
             $table->string('image_url')->default('default.png');
             $table->rememberToken();
             $table->timestamps();
