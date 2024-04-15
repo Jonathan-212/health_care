@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('doctor_note')->nullable();
             $table->unsignedBigInteger('payment_id')->nullable();
             $table->foreign('payment_id')->references('id')->on('payments')->onUpdate('cascade');
-            $table->string('status')->default("Not Yet Started");
+            $table->string('status')->default("Unpaid");
             $table->timestamps();
         });
     }
