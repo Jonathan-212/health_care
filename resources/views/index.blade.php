@@ -1,4 +1,7 @@
 @extends('layout')
+
+@section('title', 'Dashboard')
+
 @section('content')
 
     <div style="height:100%; width:calc(100% - 300px)">

@@ -1,4 +1,7 @@
 @extends('layout')
+
+@section('title', 'Doctor List')
+
 @section('content')
 
     <div style="height:100%; width:calc(100% - 300px); display: flex; justify-content:center; align-items:center; flex-direction:column; overflow:hidden">
