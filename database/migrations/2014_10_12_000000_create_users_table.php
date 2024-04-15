@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('role')->default('patient');
             $table->string('specialist')->nullable($value = true);
+            $table->text('about_doctor')->nullable($value = true);
             $table->string('image_url')->default('default.png');
             $table->rememberToken();
             $table->timestamps();
