@@ -24,3 +24,4 @@ Route::post('/user/register', [UserController::class, 'register']);
 Route::get('/user/logout', [UserController::class, 'logout']);
 
 Route::get('/consultation/doctor-list', [ConsultationController::class, 'getDoctorList']);
+Route::get('/consultation/doctor/{doctorId}', [ConsultationController::class, 'getDoctorDetail']);

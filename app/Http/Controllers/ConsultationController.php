@@ -16,4 +16,15 @@ class ConsultationController extends Controller
         return view("doctorList")
             ->with('doctors', $doctor);
     }
+
+    public function getDoctorDetail(Request $request){
+        $doctor = User::find($request->doctorId);
+
+        if($doctor == null || $doctor->role == "patient"){
+            return redirect('/consultation/doctor-list');
+        }
+
+        return view("doctorDetail")
+            ->with('doctor', $doctor);
+    }
 }
