@@ -62,6 +62,7 @@ class ConsultationController extends Controller
 
         $doctor = User::find($consultation->doctor_id);
         $consultation->status = "Done";
+        $consultation->save();
         return view('videoCallMockUp')
             ->with("consultation", $consultation)
             ->with("doctor", $doctor);
