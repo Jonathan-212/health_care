@@ -23,8 +23,8 @@
                             <div>{{Auth::user()->phone}}</div>
                         </div>
                         <div style="padding-bottom:10px">
-                            <div style="font-size: smaller; font-weight:bold">Height - Weight</div>
-                            <div>{{Auth::user()->height}} - {{Auth::user()->weight}}</div>
+                            <div style="font-size: smaller; font-weight:bold">Height/Weight</div>
+                            <div>{{Auth::user()->height}}/{{Auth::user()->weight}}</div>
                         </div>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
         <div style="display: flex; height:50%; justify-content:space-evenly; align-items:center;">
             <div style="width: 60%; height:100%; padding:0 20px 20px 20px;">
                 <div class="shadowBox" style="width: 100%; height:100%; overflow:auto">
-                    <div style="font-size:20px; padding-left:10px; font-weight:bold">My Consultation</div>
+                    <div style="font-size:20px; padding-left:10px; font-weight:bold">Consultation History</div>
                     <table class="table" style="">
                         <thead>
                           <tr>

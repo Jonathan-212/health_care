@@ -59,6 +59,7 @@
         <a href="/" class="menu">Dashboard</a>
         <a href="/consultation/doctor-list" class="menu">Consultation</a>
         <a href="/medicine" class="menu">My Medicine</a>
+        <a href="/healthy-record" class="menu">Healthy Record</a>
         <a href="/setting" class="menu">Setting</a>
 
         <a href="/user/logout" class="menu" style="position: absolute; bottom:0px; margin-bottom: 50px">Logout</a>
