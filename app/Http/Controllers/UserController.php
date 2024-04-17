@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use App\Models\Payment;
+use App\Models\Consultation;
 
 class UserController extends Controller
 {
@@ -16,8 +18,16 @@ class UserController extends Controller
         if (!Auth::check()){
             return redirect("/user/login");
         }
+        $myconsultation = Consultation::where('patient_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        foreach($myconsultation as $my){
+            $doctor = User::find($my->doctor_id);
+            $my["doctor"] = $doctor;
+        }
 
-        return view('index');
+        $payment = Payment::all();
+        return view('index')
+            ->with('myconsultation', $myconsultation)
+            ->with('payment', $payment);
     }
 
     public function loginPage(Request $request){

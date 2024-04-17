@@ -67,4 +67,43 @@ class ConsultationController extends Controller
             ->with("consultation", $consultation)
             ->with("doctor", $doctor);
     }
+
+    public function checkStatusConsultation(Request $request){
+        $consultation = Consultation::find($request->consultId);
+        $consultation["doctor"] = User::find($consultation->doctor_id);
+
+        if($consultation == null){
+            return redirect()->back();
+        }
+        else if($consultation->status == "Unpaid"){
+            return redirect()->back()->with(['paymentMethod' => $consultation]);
+        }
+        else if($consultation->status == "Paid"){
+            return redirect()->back()->with(['startTheMeetingNow' => $consultation]);
+        }
+        else if($consultation->status == "Done"){
+            return redirect()->back()->with(['done' => $consultation]);
+        }
+    }
+
+    public function cancelConsultPopup(Request $request){
+        $consultation = Consultation::find($request->consultId);
+        $consultation["doctor"] = User::find($consultation->doctor_id);
+
+        if($consultation == null){
+            return redirect()->back();
+        }
+
+        return redirect()->back()->with(['cancelPopup' => $consultation]);
+    }
+
+    public function deleteConsultation(Request $request){
+        $consultation = Consultation::find($request->consultId);
+        $temp = User::find($consultation->doctor_id);
+        $consultation->delete();
+
+        return redirect()->back()->with(['cancelSuccess' => "Successfully cancelled consultation with ". $temp->name . "as a ". $temp->specialist . " speciality!"]);
+
+    }
+
 }
