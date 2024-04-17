@@ -15,10 +15,10 @@
             border-radius: 15px;
         }
         .btn-primary{
-            background-color:#E74646;
+            background-color:#142474;
         }
         .btn-primary:hover{
-            background-color:#FA9884;
+            background-color:#1e38bb;
         }
     </style>
 </head>
@@ -26,7 +26,7 @@
     <form action="/user/register" method="POST" enctype="multipart/form-data" class="shadowBox" style="background-color:#ffffff; width: 500px; padding:30px 50px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
         {{ csrf_field() }}
 
-        <div style="font-family: sans-serif; font-weight:bold; color:#E74646; font-size:25px">HEALTHcare</div>
+        <div style="font-family: sans-serif; font-weight:bold; color:#142474; font-size:25px">HEALTHcare</div>
 
         <div class="form-group">
             <label for="name">Full Name</label>
@@ -88,7 +88,7 @@
         <button type="submit" class="btn btn-primary" style="display:block; margin:20px auto 0px auto; border:none">Signup</button>
 
         <div style="display: flex; margin-top:10px">
-            <a href="/user/login" style="text-decoration: none; display:block; margin:0 auto; color:#FA9884">Aleady have an account? Login now!</a>
+            <a href="/user/login" style="text-decoration: none; display:block; margin:0 auto; color:#1e38bb">Aleady have an account? Login now!</a>
         </div>
 
     </form>
