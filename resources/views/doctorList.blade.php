@@ -21,6 +21,7 @@
                         <th scope="col">#</th>
                         <th scope="col">Photo</th>
                         <th scope="col">Name</th>
+                        <th scope="col">University</th>
                         <th scope="col">Age</th>
                         <th scope="col">Specialist</th>
                       </tr>
@@ -34,6 +35,7 @@
                                 <th scope="row">{{$number}}</th>
                                 <td><img src="{{Storage::url('images/'.$doctor->image_url)}}" style="width: 50px" alt="" class="mid"></td>
                                 <td>{{$doctor->name}}</td>
+                                <td>{{$doctor->doctor_university}}</td>
                                 <td>{{$doctor->age()}}</td>
                                 <td>{{$doctor->specialist}}</td>
                             </tr>
