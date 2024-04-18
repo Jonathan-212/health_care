@@ -10,11 +10,12 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Models\Payment;
 use App\Models\Consultation;
+use App\Charts\HealthyRecordChart;
 
 class UserController extends Controller
 {
     //
-    public function index(Request $request){
+    public function index(Request $request, HealthyRecordChart $chart){
         if (!Auth::check()){
             return redirect("/user/login");
         }
@@ -27,7 +28,8 @@ class UserController extends Controller
         $payment = Payment::all();
         return view('index')
             ->with('myconsultation', $myconsultation)
-            ->with('payment', $payment);
+            ->with('payment', $payment)
+            ->with('recordChart', $chart->build());
     }
 
     public function loginPage(Request $request){
