@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\HealthyRecordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,3 +36,8 @@ Route::post('/payment', [PaymentController::class, 'approvePayment']);
 Route::get('/consultation/start/{consultId}', [ConsultationController::class, 'startConsultation']);
 Route::get('/consultation/check/{consultId}', [ConsultationController::class, 'checkStatusConsultation']);
 Route::get('/cancelConsultationConfirmation/{consultId}', [ConsultationController::class, 'cancelConsultPopup']);
+
+Route::get('/healthy-record', [HealthyRecordController::class, 'getHealthyRecord']);
+Route::post('/healthy-record', [HealthyRecordController::class, 'createHealthyRecord']);
+Route::get('/confDeleteRecord/{recordId}', [HealthyRecordController::class, 'deleteRecordPopup']);
+Route::delete('/healthy-record', [HealthyRecordController::class, 'deleteRecord']);
