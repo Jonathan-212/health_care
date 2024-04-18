@@ -30,8 +30,10 @@
                 </div>
             </div>
             <div style="width: 60%; height:100%; padding:20px 20px 20px 0px">
-                <div class="shadowBox" style="width: 100%; height:100%; display:flex; justify-content:space-around; align-items:center">
-
+                <div class="shadowBox" style="width: 100%; height:100%; display:flex; justify-content:center; align-items:center;">
+                    <div style="width: 100%; ">
+                        {!! $recordChart->container() !!}
+                    </div>
                 </div>
             </div>
         </div>
@@ -248,6 +250,10 @@
     </div>
   </div>
 @endif
+
+<script src="{{ $recordChart->cdn() }}"></script>
+
+{{ $recordChart->script() }}
 
 <script>
     $(document).ready(function() {

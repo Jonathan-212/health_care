@@ -8,11 +8,13 @@
         <div style="padding: 20px; width:300px; height:100%; overflow:hidden">
             <div class="shadowBox" style="width: 100%; height:100%; overflow:auto; display: flex; flex-direction:column; justify-content:space-evenly; align-items:center; ">
                 <div style="width: 150px"><img src="{{Storage::url('images/'. Auth::user()->image_url)}}" alt="" srcset="" style="width: 100%"></div>
-                <div style="">
+                <div style="padding:0 30px">
                     <div style="font-weight: bold">Doctor's Name</div>
                     <div style="padding-bottom: 30px">{{$doctor->name}}</div>
                     <div style="font-weight: bold">Speciality</div>
                     <div style="padding-bottom: 30px">{{$doctor->specialist}}</div>
+                    <div style="font-weight: bold">University</div>
+                    <div style="padding-bottom: 30px">{{$doctor->doctor_university}}</div>
                     <div style="font-weight: bold">Age</div>
                     <div style="padding-bottom: 30px">{{$doctor->age()}}</div>
                 </div>
