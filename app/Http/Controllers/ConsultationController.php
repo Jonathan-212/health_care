@@ -13,10 +13,26 @@ class ConsultationController extends Controller
 {
     //
     public function getDoctorList(Request $request){
-        $doctor = User::where("role", "doctor")->get();
+
+        $search = "Search";
+        if($request->search != null && $request->search != 'Search'){
+            $doctor = User::where("role", "doctor")->where("name", 'LIKE',"%$request->search%")->get();
+            $search = $request->search ;
+        }
+        else{
+            $doctor = User::where("role", "doctor")->get();
+        }
+
+        $speciality = null;
+        if($request->speciality != null){
+            $doctor = $doctor->where("specialist", $request->speciality);
+            $speciality = $request->speciality;
+        }
 
         return view("doctorList")
-            ->with('doctors', $doctor);
+            ->with('doctors', $doctor)
+            ->with('searchText', $search)
+            ->with('specialityFilter', $speciality);
     }
 
     public function getDoctorDetail(Request $request){
