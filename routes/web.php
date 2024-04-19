@@ -41,3 +41,8 @@ Route::get('/healthy-record', [HealthyRecordController::class, 'getHealthyRecord
 Route::post('/healthy-record', [HealthyRecordController::class, 'createHealthyRecord']);
 Route::get('/confDeleteRecord/{recordId}', [HealthyRecordController::class, 'deleteRecordPopup']);
 Route::delete('/healthy-record', [HealthyRecordController::class, 'deleteRecord']);
+
+
+// For Doctor
+Route::get('/doctor/consultation/', [ConsultationController::class, 'getMyConsultation']);
+Route::get('/doctor/consultation/{consultId}', [ConsultationController::class, 'getOneConsultation']);

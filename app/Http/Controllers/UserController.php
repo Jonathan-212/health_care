@@ -19,17 +19,28 @@ class UserController extends Controller
         if (!Auth::check()){
             return redirect("/user/login");
         }
-        $myconsultation = Consultation::where('patient_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
-        foreach($myconsultation as $my){
-            $doctor = User::find($my->doctor_id);
-            $my["doctor"] = $doctor;
-        }
+        if(Auth::user()->role == 'patient'){
+            $myconsultation = Consultation::where('patient_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+            foreach($myconsultation as $my){
+                $doctor = User::find($my->doctor_id);
+                $my["doctor"] = $doctor;
+            }
 
-        $payment = Payment::all();
-        return view('index')
-            ->with('myconsultation', $myconsultation)
-            ->with('payment', $payment)
-            ->with('recordChart', $chart->build());
+            $payment = Payment::all();
+            return view('index')
+                ->with('myconsultation', $myconsultation)
+                ->with('payment', $payment)
+                ->with('recordChart', $chart->build());
+        }
+        if(Auth::user()->role == 'doctor'){
+            $myconsultation = Consultation::where('doctor_id', Auth::user()->id)->where('status', '!=', 'Done')->orderBy('created_at', 'DESC')->get();
+            foreach($myconsultation as $my){
+                $patient = User::find($my->patient_id);
+                $my["patient"] = $patient;
+            }
+            return view('indexDoctor')
+                ->with('myconsultation', $myconsultation);
+        }
     }
 
     public function loginPage(Request $request){
