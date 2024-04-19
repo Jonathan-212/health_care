@@ -63,7 +63,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Dr. Feronika, Sp.GK',
             'email' => 'feronika@gmail.com',
-            'password' => bcrypt('feronikal123'),
+            'password' => bcrypt('feronika123'),
             'date_of_birth' => '2004-05-12',
             'height' => 175,
             'weight' => 55,
