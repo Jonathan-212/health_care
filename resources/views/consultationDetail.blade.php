@@ -61,7 +61,29 @@
                         </div>
 
                     </form>
-
+                    @php
+                        $num = 1;
+                    @endphp
+                    @foreach ($consultation->getMedicine as $medicine)
+                        <div class="row">
+                            <div class="col"style="display: flex;align-items:center">
+                                <a href="/confDeleteMedicine/{{$medicine->id}}" style="text-decoration: none;width:50px"><i class="material-icons" style="color:#154a80; font-size:30px">delete</i></a>
+                                <div class="form-floating mb-3" style="width: calc(100% - 50px)">
+                                    <input type="text" name="medicine" class="form-control" id="medicine" value="{{$medicine->medicine_name}}" style="color:black">
+                                    <label for="medicine">Medicine {{$num}}</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="freq" class="form-control" id="freq" value="{{$medicine->frequency}}" style="color:black">
+                                    <label for="freq">Frequency</label>
+                                </div>
+                            </div>
+                        </div>
+                        @php
+                            $num = $num+1;
+                        @endphp
+                    @endforeach
                 @elseif ($consultation->status == "Paid")
                 <div style="color: red">Wait for the Patient to start the Video Call Consultation</div>
 
@@ -114,12 +136,41 @@
   </div>
 @endif
 
+@if ($message = Session::get('deleteConfPopup'))
+<div class="modal fade" tabindex="-1" id="deleteModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add New Record</h5>
+            <button type="submit" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="/medicine" method="POST" enctype="multipart/form-data">
+            {{ csrf_field() }}
+            @method('delete')
+        <div class="modal-body" style="padding: 30px; text-align:center">
+            <input type="text" value="{{$message->id}}" name="medicineId" style="display: none">
+
+            <div >Are you sure wanna detele {{$message->medicine_name}}?</div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary"  data-dismiss="modal" aria-label="Close" style="background-color:#154a80; border:none">Yes</button>
+            <div class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close" style="background-color:rgb(216, 23, 23); border:none">Close</div>
+        </div>
+        </form>
+      </div>
+    </div>
+</div>
+@endif
+
 <script>
     $(document).ready(function() {
         $('#failedMessageModal').modal('show');
     });
     $(document).ready(function() {
         $('#successMessageModal').modal('show');
+    });
+    $(document).ready(function() {
+        $('#deleteModal').modal('show');
     });
 </script>
 

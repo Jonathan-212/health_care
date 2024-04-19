@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Consultation extends Model
+class MedicineRecipe extends Model
 {
     use HasFactory;
 
-    public function getMedicine(){
-        return $this->hasMany(MedicineRecipe::class, 'consultation_id', 'id');
+    public function getConsultation(){
+        return $this->belongsTo(HostnameGroup::class, 'consultation_id', 'id');
     }
 }
