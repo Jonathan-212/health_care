@@ -241,6 +241,7 @@
           <button type="submit" id="closeSuccessMessageModal" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+            <p style="color: black; padding:10px 30px; text-align:center">Doctor Note: {{$message->doctor_note}}</p>
             <p style="color: black; padding:20px 40px; text-align:center">Your Consultation with {{$message["doctor"]->name}} as a {{$message["doctor"]->specialist}} speciality has been done on {{Date('d M Y, H:i', strtotime($message->updated_at))}}. Thank You and Stay Healthy!</p>
         </div>
         <div class="modal-footer">

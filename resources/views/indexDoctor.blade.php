@@ -32,7 +32,6 @@
                     <th scope="col">Patient Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Age</th>
-                    <th scope="col">Note</th>
                     <th scope="col">Register Date</th>
                     <th scope="col">Status</th>
                   </tr>
@@ -47,7 +46,6 @@
                         <td>{{$mc->patient->name}}</td>
                         <td>{{$mc->patient->email}}</td>
                         <td>{{$mc->patient->age()}}</td>
-                        <td style="max-width: 200px">{{$mc->patient_note}}</td>
                         <td>{{Date('d M Y', strtotime($mc->created_at))}}</td>
                         <td>{{$mc->status}}</td>
                       </tr>

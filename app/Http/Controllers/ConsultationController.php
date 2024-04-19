@@ -142,4 +142,31 @@ class ConsultationController extends Controller
             ->with('myconsultation', $myconsultation)
             ->with('filterStatus', $status);
     }
+
+    public function getOneConsultation(Request $request){
+        $consultation = Consultation::find($request->consultId);
+        $consultation["patient"] = User::find($consultation->patient_id);
+
+        return view('consultationDetail')
+            ->with('consultation', $consultation);
+    }
+
+    public function setDoctorNote(Request $request){
+        $validation = [
+            'doctor_note' => 'required | min:5',
+        ];
+
+        $validator = Validator::make($request->all(), $validation);
+
+        if ($validator->fails()){
+            return redirect()->back()->with(['failed' => 'validation'])->withErrors($validator);
+        }
+
+        $consultation = Consultation::find($request->consultId);
+        $consultation->doctor_note = $request->doctor_note;
+        $consultation->save();
+
+        return redirect()->back()->with(['success' => "Successfully set the note for patient"]);
+    }
+
 }
