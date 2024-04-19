@@ -122,4 +122,24 @@ class ConsultationController extends Controller
 
     }
 
+
+
+    // Doctor
+    public function getMyConsultation(Request $request){
+        $myconsultation = Consultation::where('doctor_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        foreach($myconsultation as $my){
+            $patient = User::find($my->patient_id);
+            $my["patient"] = $patient;
+        }
+
+        $status = null;
+        if($request->status != null){
+            $myconsultation = $myconsultation->where("status", "$request->status");
+            $status = $request->status;
+        }
+
+        return view ('consultationList')
+            ->with('myconsultation', $myconsultation)
+            ->with('filterStatus', $status);
+    }
 }
