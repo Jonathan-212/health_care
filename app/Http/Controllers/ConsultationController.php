@@ -13,10 +13,26 @@ class ConsultationController extends Controller
 {
     //
     public function getDoctorList(Request $request){
-        $doctor = User::where("role", "doctor")->get();
+
+        $search = "Search";
+        if($request->search != null && $request->search != 'Search'){
+            $doctor = User::where("role", "doctor")->where("name", 'LIKE',"%$request->search%")->get();
+            $search = $request->search ;
+        }
+        else{
+            $doctor = User::where("role", "doctor")->get();
+        }
+
+        $speciality = null;
+        if($request->speciality != null){
+            $doctor = $doctor->where("specialist", $request->speciality);
+            $speciality = $request->speciality;
+        }
 
         return view("doctorList")
-            ->with('doctors', $doctor);
+            ->with('doctors', $doctor)
+            ->with('searchText', $search)
+            ->with('specialityFilter', $speciality);
     }
 
     public function getDoctorDetail(Request $request){
@@ -104,6 +120,53 @@ class ConsultationController extends Controller
 
         return redirect()->back()->with(['cancelSuccess' => "Successfully cancelled consultation with ". $temp->name . "as a ". $temp->specialist . " speciality!"]);
 
+    }
+
+
+
+    // Doctor
+    public function getMyConsultation(Request $request){
+        $myconsultation = Consultation::where('doctor_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        foreach($myconsultation as $my){
+            $patient = User::find($my->patient_id);
+            $my["patient"] = $patient;
+        }
+
+        $status = null;
+        if($request->status != null){
+            $myconsultation = $myconsultation->where("status", "$request->status");
+            $status = $request->status;
+        }
+
+        return view ('consultationList')
+            ->with('myconsultation', $myconsultation)
+            ->with('filterStatus', $status);
+    }
+
+    public function getOneConsultation(Request $request){
+        $consultation = Consultation::find($request->consultId);
+        $consultation["patient"] = User::find($consultation->patient_id);
+
+        return view('consultationDetail')
+            ->with('consultation', $consultation);
+    }
+
+    public function setDoctorNote(Request $request){
+        $validation = [
+            'doctor_note' => 'required | min:5',
+        ];
+
+        $validator = Validator::make($request->all(), $validation);
+
+        if ($validator->fails()){
+            return redirect()->back()->with(['failed' => 'validation'])->withErrors($validator);
+        }
+
+        $consultation = Consultation::find($request->consultId);
+        $consultation->doctor_note = $request->doctor_note;
+        $consultation->save();
+
+        return redirect()->back()->with(['success' => "Successfully set the note for patient"]);
     }
 
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\HealthyRecordController;
+use App\Http\Controllers\MedicineRecipeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,3 +42,16 @@ Route::get('/healthy-record', [HealthyRecordController::class, 'getHealthyRecord
 Route::post('/healthy-record', [HealthyRecordController::class, 'createHealthyRecord']);
 Route::get('/confDeleteRecord/{recordId}', [HealthyRecordController::class, 'deleteRecordPopup']);
 Route::delete('/healthy-record', [HealthyRecordController::class, 'deleteRecord']);
+
+Route::get('/medicine', [MedicineRecipeController::class, 'viewMyMedicine']);
+Route::get('/medicineStatusChange/{medId}', [MedicineRecipeController::class, 'statusChangePopup']);
+Route::put('/medicine', [MedicineRecipeController::class, 'updateStatusMedicine']);
+
+// For Doctor
+Route::get('/doctor/consultation', [ConsultationController::class, 'getMyConsultation']);
+Route::get('/doctor/consultation/{consultId}', [ConsultationController::class, 'getOneConsultation']);
+Route::put('/doctor/consultation', [ConsultationController::class, 'setDoctorNote']);
+
+Route::post('/medicine', [MedicineRecipeController::class, 'addMedicine']);
+Route::get('/confDeleteMedicine/{medId}', [MedicineRecipeController::class, 'deleteMedicinePopup']);
+Route::delete('/medicine', [MedicineRecipeController::class, 'deleteMedicine']);

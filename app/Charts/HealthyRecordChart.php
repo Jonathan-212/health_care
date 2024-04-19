@@ -3,6 +3,7 @@
 namespace App\Charts;
 
 use ArielMejiaDev\LarapexCharts\LarapexChart;
+use Illuminate\Support\Facades\Auth;
 use App\Models\HealthyRecord;
 
 class HealthyRecordChart
@@ -16,7 +17,7 @@ class HealthyRecordChart
 
     public function build(): \ArielMejiaDev\LarapexCharts\LineChart
     {
-        $record = HealthyRecord::all()->sortByDesc('created_at')->take(5);
+        $record = HealthyRecord::where('patient_id', Auth::user()->id)->get()->sortByDesc('created_at')->take(5);
         $record = $record->sortBy('created_at');
 
         $heart_rate = array();

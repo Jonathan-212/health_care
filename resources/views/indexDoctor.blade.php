@@ -4,104 +4,60 @@
 
 @section('content')
 
-    <div style="height:100%; width:calc(100% - 300px);">
-        <div style="display: flex; height:50%; justify-content:space-evenly; align-items:center;">
-            <div style="width: 40%; height:100%; padding:20px">
-                <div class="shadowBox" style="width: 100%; height:100%; display:flex; align-items:center; justify-content:space-around">
-                    <div style="width: 40%"><img src="{{Storage::url('images/'. Auth::user()->image_url)}}" style="width:100%" alt=""></div>
-                    <div style="padding-left:10px; width:max-content;">
-                        <div style="padding-bottom:10px">
-                            <div style="font-size: smaller; font-weight:bold">Name</div>
-                            <div>{{Auth::user()->name}}</div>
-                        </div>
-                        <div style="padding-bottom:10px">
-                            <div style="font-size: smaller; font-weight:bold">Email</div>
-                            <div>{{Auth::user()->email}}</div>
-                        </div>
-                        <div style="padding-bottom:10px">
-                            <div style="font-size: smaller; font-weight:bold">Phone</div>
-                            <div>{{Auth::user()->phone}}</div>
-                        </div>
-                        <div style="padding-bottom:10px">
-                            <div style="font-size: smaller; font-weight:bold">Height/Weight</div>
-                            <div>{{Auth::user()->height}}/{{Auth::user()->weight}}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div style="width: 60%; height:100%; padding:20px 20px 20px 0px">
-                <div class="shadowBox" style="width: 100%; height:100%; display:flex; justify-content:center; align-items:center;">
-                    <div style="width: 100%; ">
-                        {!! $recordChart->container() !!}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div style="display: flex; height:50%; justify-content:space-evenly; align-items:center;">
-            <div style="width: 60%; height:100%; padding:0 20px 20px 20px;">
-                <div class="shadowBox" style="width: 100%; height:100%; overflow:auto">
-                    <div style="font-size:20px; padding-left:10px; font-weight:bold">Consultation History</div>
-                    <table class="table" style="">
-                        <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Doctor</th>
-                            <th scope="col">Speciality</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Date</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                            @php
-                                $num = 1;
-                            @endphp
-                            @foreach ($myconsultation as $mc)
-                              <tr class="hoverList" ondblclick="window.location = '/consultation/check/{{$mc->id}}'">
-                                <th scope="row">{{$num}}</th>
-                                <td>{{$mc->doctor->name}}</td>
-                                <td>{{$mc->doctor->specialist}}</td>
-                                <td>{{$mc->status}}</td>
-                                <td>{{Date('d M Y', strtotime($mc->created_at))}}</td>
-                              </tr>
-                                @php
-                                    $num = $num+1;
-                                @endphp
-                            @endforeach
-                        </tbody>
-                      </table>
-                </div>
-            </div>
-            <div style="width: 40%; height:100%; padding:0 20px 20px 0px; overflow:hidden">
-                <div class="shadowBox" style="width: 100%; height:100%;overflow:auto">
-                    <div style="font-size:20px; padding-left:10px; font-weight:bold">My Medicine</div>
-                    <table class="table" style="">
-                        <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Medicine</th>
-                            <th scope="col">Frequency</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                            @php
-                                $num = 1;
-                            @endphp
-                            @foreach ($medicine as $med)
-                              <tr class="hoverList">
-                                <th scope="row">{{$num}}</th>
-                                <td>{{$med->medicine_name}}</td>
-                                <td>{{$med->frequency}}</td>
-                              </tr>
-                                @php
-                                    $num = $num+1;
-                                @endphp
-                            @endforeach
-                        </tbody>
-                      </table>
-                </div>
+<div style="height:100%; width:calc(100% - 300px); display: flex; justify-content:center; align-items:center; overflow:hidden;">
+    <div style="padding: 20px; width:300px; height:100%; overflow:hidden">
+        <div class="shadowBox" style="width: 100%; height:100%; display: flex; flex-direction:column; justify-content:space-evenly; align-items:center; ">
+            <div style="width: 150px"><img src="{{Storage::url('images/'. Auth::user()->image_url)}}" alt="" srcset="" style="width: 100%"></div>
+            <div style="padding:0 30px">
+                <div style="font-weight: bold">Name</div>
+                <div style="padding-bottom: 20px">{{Auth::user()->name}}</div>
+                <div style="font-weight: bold">Speciality</div>
+                <div style="padding-bottom: 20px">{{Auth::user()->specialist}}</div>
+                <div style="font-weight: bold">Email</div>
+                <div style="padding-bottom: 20px">{{Auth::user()->email}}</div>
+                <div style="font-weight: bold">University</div>
+                <div style="padding-bottom: 20px">{{Auth::user()->doctor_university}}</div>
+                <div style="font-weight: bold">Age</div>
+                <div style="padding-bottom: 20px">{{Auth::user()->age()}}</div>
             </div>
         </div>
     </div>
+    <div style="width:calc(100% - 300px); height:100%; overflow:hidden; padding:20px 20px 20px 0">
+        <div class="shadowBox" style="width: 100%; height:100%; position: relative; overflow:auto">
+            <div style="font-size:20px; padding-left:10px; font-weight:bold">Upcoming Consultation</div>
+            <table class="table" style="">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Patient Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Register Date</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    @php
+                        $num = 1;
+                    @endphp
+                    @foreach ($myconsultation as $mc)
+                      <tr class="hoverList" ondblclick="window.location = '/doctor/consultation/{{$mc->id}}'">
+                        <th scope="row">{{$num}}</th>
+                        <td>{{$mc->patient->name}}</td>
+                        <td>{{$mc->patient->email}}</td>
+                        <td>{{$mc->patient->age()}}</td>
+                        <td>{{Date('d M Y', strtotime($mc->created_at))}}</td>
+                        <td>{{$mc->status}}</td>
+                      </tr>
+                        @php
+                            $num = $num+1;
+                        @endphp
+                    @endforeach
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
 
 {{-- Pop Up --}}
 @if ($message = Session::get('success'))
@@ -265,7 +221,6 @@
           <button type="submit" id="closeSuccessMessageModal" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <p style="color: black; padding:10px 30px; text-align:center">Doctor Note: {{$message->doctor_note}}</p>
             <p style="color: black; padding:20px 40px; text-align:center">Your Consultation with {{$message["doctor"]->name}} as a {{$message["doctor"]->specialist}} speciality has been done on {{Date('d M Y, H:i', strtotime($message->updated_at))}}. Thank You and Stay Healthy!</p>
         </div>
         <div class="modal-footer">
@@ -276,9 +231,6 @@
   </div>
 @endif
 
-<script src="{{ $recordChart->cdn() }}"></script>
-
-{{ $recordChart->script() }}
 
 <script>
     $(document).ready(function() {
