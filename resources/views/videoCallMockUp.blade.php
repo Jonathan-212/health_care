@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Doctor List')
+@section('title', 'Video Call Consultation')
 
 @section('content')
 
