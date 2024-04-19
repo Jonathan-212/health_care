@@ -43,6 +43,9 @@ Route::post('/healthy-record', [HealthyRecordController::class, 'createHealthyRe
 Route::get('/confDeleteRecord/{recordId}', [HealthyRecordController::class, 'deleteRecordPopup']);
 Route::delete('/healthy-record', [HealthyRecordController::class, 'deleteRecord']);
 
+Route::get('/medicine', [MedicineRecipeController::class, 'viewMyMedicine']);
+Route::get('/medicineStatusChange/{medId}', [MedicineRecipeController::class, 'statusChangePopup']);
+Route::put('/medicine', [MedicineRecipeController::class, 'updateStatusMedicine']);
 
 // For Doctor
 Route::get('/doctor/consultation', [ConsultationController::class, 'getMyConsultation']);

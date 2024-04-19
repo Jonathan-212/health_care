@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Payment;
 use App\Models\Consultation;
 use App\Charts\HealthyRecordChart;
+use App\Models\MedicineRecipe;
 
 class UserController extends Controller
 {
@@ -20,16 +21,23 @@ class UserController extends Controller
             return redirect("/user/login");
         }
         if(Auth::user()->role == 'patient'){
+            $medicine = array();
+
             $myconsultation = Consultation::where('patient_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
             foreach($myconsultation as $my){
                 $doctor = User::find($my->doctor_id);
                 $my["doctor"] = $doctor;
+                $consmedicine =  MedicineRecipe::where('consultation_id', $my->id)->where('status', "Add & Notify Me")->get();
+                foreach($consmedicine as $med){
+                    array_push($medicine, $med);
+                }
             }
 
             $payment = Payment::all();
             return view('index')
                 ->with('myconsultation', $myconsultation)
                 ->with('payment', $payment)
+                ->with('medicine', $medicine)
                 ->with('recordChart', $chart->build());
         }
         if(Auth::user()->role == 'doctor'){

@@ -71,9 +71,33 @@
                       </table>
                 </div>
             </div>
-            <div style="width: 40%; height:100%; padding:0 20px 20px 0px">
-                <div class="shadowBox" style="width: 100%; height:100%; display:flex; justify-content:space-around; align-items:center">
-
+            <div style="width: 40%; height:100%; padding:0 20px 20px 0px; overflow:hidden">
+                <div class="shadowBox" style="width: 100%; height:100%;overflow:auto">
+                    <div style="font-size:20px; padding-left:10px; font-weight:bold">My Medicine</div>
+                    <table class="table" style="">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Medicine</th>
+                            <th scope="col">Frequency</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                                $num = 1;
+                            @endphp
+                            @foreach ($medicine as $med)
+                              <tr class="hoverList">
+                                <th scope="row">{{$num}}</th>
+                                <td>{{$med->medicine_name}}</td>
+                                <td>{{$med->frequency}}</td>
+                              </tr>
+                                @php
+                                    $num = $num+1;
+                                @endphp
+                            @endforeach
+                        </tbody>
+                      </table>
                 </div>
             </div>
         </div>
