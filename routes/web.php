@@ -47,6 +47,11 @@ Route::get('/medicine', [MedicineRecipeController::class, 'viewMyMedicine']);
 Route::get('/medicineStatusChange/{medId}', [MedicineRecipeController::class, 'statusChangePopup']);
 Route::put('/medicine', [MedicineRecipeController::class, 'updateStatusMedicine']);
 
+Route::get('/setting', [UserController::class, 'getSettingPage']);
+Route::put('/setting', [UserController::class, 'updateProfile']);
+Route::put('/changeProfilePhoto', [UserController::class, 'changePhoto']);
+Route::put('/removeProfilePhoto', [UserController::class, 'removePhoto']);
+
 // For Doctor
 Route::get('/doctor/consultation', [ConsultationController::class, 'getMyConsultation']);
 Route::get('/doctor/consultation/{consultId}', [ConsultationController::class, 'getOneConsultation']);

@@ -123,4 +123,9 @@ class UserController extends Controller
 
         return redirect("/");
     }
+
+    public function getSettingPage(Request $request){
+
+        return view('setting');
+    }
 }
