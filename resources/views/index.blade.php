@@ -306,7 +306,7 @@
 @php
     $countNotif= 1;
 @endphp
-@if ($notify)
+@if ($notify && Auth::user()->notification == "true")
     <div class="toast-container top-0 end-0 p-3">
 
         @foreach ($medicine as $med)
