@@ -10,7 +10,7 @@
             </div>
 
             <div style="width: 100%; padding-bottom:20px">
-                <div style="width: 150px; display:block; margin:0 auto; padding-bottom:20px"><img src="{{Storage::url('images/'. Auth::user()->image_url)}}" alt="" srcset="" style="width: 100%"></div>
+                <div style="width: 150px; display:block; margin:0 auto; padding-bottom:20px"><img src="{{Storage::url('images/'. Auth::user()->image_url)}}" alt="" srcset="" style="width: 100% ;  aspect-ratio : 1 / 1; border-radius:100%"></div>
                 <div id="updatePhoto" style="display:block; margin:0 auto; background-color:#142474; width:fit-content; text-align:center; border-radius:10px; color:white; padding:3px 10px; margin-bottom:10px; cursor: pointer;">Change Photo</div>
                 <div id="removePhoto" style="display:block; margin:0 auto; background-color:#142474; width:fit-content; text-align:center; border-radius:10px; color:white; padding:3px 10px; cursor: pointer;">Remove Photo</div>
             </div>
