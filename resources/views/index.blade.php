@@ -103,6 +103,10 @@
         </div>
     </div>
 
+@php
+    $notify = true;
+@endphp
+
 {{-- Pop Up --}}
 @if ($message = Session::get('success'))
 <div class="modal fade" tabindex="-1" id="successMessageModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -122,6 +126,9 @@
       </div>
     </div>
   </div>
+  @php
+    $notify = false;
+  @endphp
 @endif
 
 @if ($message = Session::get('paymentMethod'))
@@ -156,6 +163,9 @@
           </div>
         </div>
     </div>
+    @php
+        $notify = false;
+    @endphp
 @endif
 
 @if ($message = Session::get('confirmPayment'))
@@ -189,6 +199,9 @@
           </div>
         </div>
     </div>
+    @php
+        $notify = false;
+    @endphp
 @endif
 
 @if ($message = Session::get('startTheMeetingNow'))
@@ -209,6 +222,9 @@
       </div>
     </div>
   </div>
+  @php
+    $notify = false;
+  @endphp
 @endif
 
 @if ($message = Session::get('cancelPopup'))
@@ -235,6 +251,9 @@
       </div>
     </div>
   </div>
+  @php
+    $notify = false;
+  @endphp
 @endif
 
 @if ($message = Session::get('cancelSuccess'))
@@ -254,6 +273,9 @@
       </div>
     </div>
   </div>
+  @php
+  $notify = false;
+@endphp
 @endif
 
 @if ($message = Session::get('done'))
@@ -274,6 +296,35 @@
       </div>
     </div>
   </div>
+  @php
+    $notify = false;
+  @endphp
+@endif
+
+
+{{-- Notification --}}
+@php
+    $countNotif= 1;
+@endphp
+@if ($notify)
+    <div class="toast-container top-0 end-0 p-3">
+
+        @foreach ($medicine as $med)
+            <div id="medicine{{$countNotif}}" class="toast" role="alert" aria-live="assertive" aria-atomic="true" >
+                <div class="toast-header">
+                    <strong class="me-auto">Medicine Reminder</strong>
+                    <small class="text-body-secondary">just now</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    Dont forget to consume your {{$med->medicine_name}} {{$med->frequency}}!
+                </div>
+            </div>
+            @php
+                $countNotif = $countNotif+1;
+            @endphp
+        @endforeach
+    </div>
 @endif
 
 <script src="{{ $recordChart->cdn() }}"></script>
@@ -306,5 +357,13 @@
         $('#doneModal').modal('show');
     });
 </script>
+
+{{-- Medicine Notifiation --}}
+@for ($i = 1; $i < $countNotif; $i++)
+    <script>
+        var idx = JSON.parse("{{ json_encode($i) }}");
+        bootstrap.Toast.getOrCreateInstance(document.getElementById('medicine'+idx)).show()
+    </script>
+@endfor
 
 @endsection
