@@ -55,7 +55,7 @@
                         @foreach ($doctors as $doctor)
                             <tr class="hoverList" onclick="window.location = '/consultation/doctor/{{$doctor->id}}'">
                                 <th scope="row">{{$number}}</th>
-                                <td><img src="{{Storage::url('images/'.$doctor->image_url)}}" style="width: 50px" alt="" class="mid"></td>
+                                <td><img src="{{Storage::url('images/'.$doctor->image_url)}}" style="width: 50px;  aspect-ratio : 1 / 1; border-radius:100%" alt="" class="mid"></td>
                                 <td>{{$doctor->name}}</td>
                                 <td>{{$doctor->doctor_university}}</td>
                                 <td>{{$doctor->age()}}</td>
