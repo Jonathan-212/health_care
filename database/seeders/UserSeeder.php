@@ -50,7 +50,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Dr. Mario, Sp.THT',
             'email' => 'mario@gmail.com',
-            'password' => bcrypt('mariol123'),
+            'password' => bcrypt('mario123'),
             'date_of_birth' => '2001-05-12',
             'height' => 175,
             'weight' => 55,
@@ -89,7 +89,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Dr. Rizky Muhammad, Sp.JP',
             'email' => 'rizky@gmail.com',
-            'password' => bcrypt('rizkyl123'),
+            'password' => bcrypt('rizky123'),
             'date_of_birth' => '2001-05-12',
             'height' => 175,
             'weight' => 55,
