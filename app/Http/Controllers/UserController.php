@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
@@ -12,6 +13,7 @@ use App\Models\Payment;
 use App\Models\Consultation;
 use App\Charts\HealthyRecordChart;
 use App\Models\MedicineRecipe;
+use Illuminate\Support\Carbon;
 
 class UserController extends Controller
 {
@@ -127,5 +129,64 @@ class UserController extends Controller
     public function getSettingPage(Request $request){
 
         return view('setting');
+    }
+
+    public function updateProfile(Request $request){
+        $validation = [
+            'name' => 'required | min:3',
+            'height' => 'required | numeric',
+            'weight' => 'required | numeric',
+            'phone' => 'required | min:5',
+            'dob' => 'required ',
+        ];
+
+        $validator = Validator::make($request->all(), $validation);
+
+        if($validator->stopOnFirstFailure()->fails()){
+            return redirect()->back()->with(['failed' => 'validation'])->withErrors($validator);
+        }
+
+        $user = User::find(Auth::user()->id);
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->height = $request->height;
+        $user->weight = $request->weight;
+        $user->date_of_birth = $request->dob;
+        $user->notification = $request->notification;
+
+        $user->save();
+
+        return redirect()->back()->with(['success' => 'Successfully updated User Information!']);
+    }
+
+    public function changePhoto(Request $request){
+        $validation = [
+            'photo' => 'required | image',
+        ];
+
+        $validator = Validator::make($request->all(), $validation);
+
+        if($validator->stopOnFirstFailure()->fails()){
+            return redirect()->back()->with(['failed' => 'validation'])->withErrors($validator);
+        }
+
+        $filePhoto = $request->file('photo');
+        $photoName = Date('Y-m-d-h-i-s', strtotime(Carbon::now())).$filePhoto->getClientOriginalName();
+
+        Storage::putFileAs('public/images/', $filePhoto, $photoName);
+
+        $user = User::find(Auth::user()->id);
+        $user->image_url = $photoName;
+        $user->save();
+
+        return redirect()->back()->with(['success' => 'Successfully Changed Your Profile Picture!']);
+    }
+
+    public function removePhoto(Request $request){
+        $user = User::find(Auth::user()->id);
+        $user->image_url = 'default.png';
+        $user->save();
+
+        return redirect()->back()->with(['success' => 'Successfully Changed Your Profile Picture!']);
     }
 }

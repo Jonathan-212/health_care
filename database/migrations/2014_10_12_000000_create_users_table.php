@@ -26,7 +26,7 @@ return new class extends Migration
             $table->text('about_doctor')->nullable($value = true);
             $table->text('doctor_university')->nullable($value = true);
             $table->string('image_url')->default('default.png');
-            $table->boolean('notification')->default(false);
+            $table->string('notification')->default("false");
             $table->rememberToken();
             $table->timestamps();
         });

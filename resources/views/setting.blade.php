@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Healty Record')
+@section('title', 'Setting')
 
 @section('content')
     <div style="height:100%; width:calc(100% - 300px); display: flex; justify-content:center; align-items:center; flex-direction:column; overflow:hidden; padding:20px">
@@ -11,8 +11,8 @@
 
             <div style="width: 100%; padding-bottom:20px">
                 <div style="width: 150px; display:block; margin:0 auto; padding-bottom:20px"><img src="{{Storage::url('images/'. Auth::user()->image_url)}}" alt="" srcset="" style="width: 100%"></div>
-                <div id="updatePhoto" style="display:block; margin:0 auto; background-color:#142474; width:fit-content; text-align:center; border-radius:10px; color:white; padding:3px 10px; margin-bottom:10px">Change Photo</div>
-                <div id="removePhoto" style="display:block; margin:0 auto; background-color:#142474; width:fit-content; text-align:center; border-radius:10px; color:white; padding:3px 10px;">Remove Photo</div>
+                <div id="updatePhoto" style="display:block; margin:0 auto; background-color:#142474; width:fit-content; text-align:center; border-radius:10px; color:white; padding:3px 10px; margin-bottom:10px; cursor: pointer;">Change Photo</div>
+                <div id="removePhoto" style="display:block; margin:0 auto; background-color:#142474; width:fit-content; text-align:center; border-radius:10px; color:white; padding:3px 10px; cursor: pointer;">Remove Photo</div>
             </div>
 
             <form action="/setting" method="POST" enctype="multipart/form-data">
@@ -61,7 +61,7 @@
                 <div style=" display:flex">
                     <div style="padding-right:10px">Notification Setting:</div>
                     <div>
-                        @if (Auth::user()->notification)
+                        @if (Auth::user()->notification == "true")
                         <input type="radio" id="on" name="notification" value="true" checked="checked">
                         <label for="on">on</label><br>
                         <input type="radio" id="off" name="notification" value="false">
@@ -120,12 +120,67 @@
     </div>
 @endif
 
+{{-- Update Photo --}}
+<div class="modal fade" tabindex="-1" id="changePhotoModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Change Profile Photo</h5>
+            <button type="submit" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" style="">
+            <form action="/changeProfilePhoto" method="POST" enctype="multipart/form-data">
+            @method('put')
+            {{ csrf_field() }}
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Upload your new photo</label>
+                <input class="form-control" name="photo" type="file" id="formFile">
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary"  data-dismiss="modal" aria-label="Close" style="background-color:#154a80; border:none">Submit</button>
+            <div class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close" style="background-color:rgb(216, 23, 23); border:none">Close</div>
+        </div>
+        </form>
+      </div>
+    </div>
+</div>
+{{-- Delete Photo --}}
+<div class="modal fade" tabindex="-1" id="removePhotoModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Remove Profile Photo</h5>
+            <button type="submit" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" style="">
+            <form action="/removeProfilePhoto" method="POST" enctype="multipart/form-data">
+                @method('put')
+                {{ csrf_field() }}
+                <div>Are you sure wanna delete your profile picture?</div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary"  data-dismiss="modal" aria-label="Close" style="background-color:#154a80; border:none">Yes</button>
+            <div class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close" style="background-color:rgb(216, 23, 23); border:none">Close</div>
+        </div>
+        </form>
+      </div>
+    </div>
+</div>
+
 <script>
     $(document).ready(function() {
         $('#failedMessageModal').modal('show');
     });
     $(document).ready(function() {
         $('#successModal').modal('show');
+    });
+    $('#updatePhoto').click(function(){
+        $('#changePhotoModal').modal('show');
+    });
+    $('#removePhoto').click(function(){
+        $('#removePhotoModal').modal('show');
     });
 </script>
 
